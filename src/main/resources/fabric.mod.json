@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "${id}",
+  "version": "${version}",
+  "name": "${name}",
+  "description": "${description}",
+  "authors": [
+    "${authors}"
+  ],
+  "contact": {
+    "homepage": "${homepage}",
+    "sources": "${sources}"
+  },
+  "license": "${license}",
+  "icon": "${icon}",
+  "environment": "${environment}",
+  "mixins": [
+    "${mixins}"
+  ],
+  "depends": {
+    "fabricloader": ">=${fabric_loader}",
+    "fabric-api-base": "*",
+    "fabric-resource-loader-v1": "*",
+    "minecraft": "${fabric_minecraft}",
+    "java": ">=${java}"
+  }
+}

@@ -1,0 +1,43 @@
+mod.version = "1.0.0"
+mod.group = "com.khazoda"
+mod.authors = "khazoda"
+mod.license = "GPLv3"
+
+mod.id = "llc"
+mod.name = "Leaf Litter Critters"
+mod.description = "critters skitter from leaf litter"
+mod.homepage = "https://khazoda.com#llc"
+mod.sources = "https://github.com/khazoda-mods/leaf-litter-critters"
+mod.icon = "assets/llc/icon.png"
+
+mod.mixins = "llc.mixins.json"
+mod.environment = "client"
+mod.modrinth_id = "whcoHyco"
+mod.curseforge_id = "1728376"
+
+deps.fabric_loader = "0.19.5"
+deps.java = "25"
+
+["26.1"]
+mod.fabric_compat = ">=26.1 <26.2"
+mod.neo_minecraft_compat = "[26.1,26.2)"
+mod.neo_compat = "[26.1.0.19-beta,26.2)"
+mod.mc_releases = ["26.1", "26.1.1", "26.1.2"]
+deps.neo_loader = "26.1.0.19-beta"
+deps.fabric_api = "0.155.3+26.1.2"
+
+["26.2"]
+mod.fabric_compat = ">=26.2 <26.3"
+mod.neo_minecraft_compat = "[26.2,26.3)"
+mod.neo_compat = "[26.2.0.88,26.3)"
+mod.mc_releases = ["26.2"]
+deps.neo_loader = "26.2.0.88"
+deps.fabric_api = "0.161.0+26.2"
+
+["26.3"]
+mod.fabric_compat = ">=26.3 <26.4"
+mod.neo_minecraft_compat = "[26.3,26.4)"
+mod.neo_compat = "[26.3.0.51-beta,26.4)"
+mod.mc_releases = ["26.3"]
+deps.neo_loader = "26.3.0.51-beta"
+deps.fabric_api = "0.161.0+26.3"

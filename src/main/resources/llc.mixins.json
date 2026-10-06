@@ -1,0 +1,9 @@
+{
+  "required": true,
+  "package": "com.khazoda.mixin",
+  "compatibilityLevel": "${java}",
+  "client": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

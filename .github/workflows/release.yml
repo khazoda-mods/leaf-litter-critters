@@ -1,0 +1,120 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      minecraft_versions:
+        description: Minecraft versions to publish (CSV or spaces); blank publishes all
+        required: false
+        type: string
+      dry_run:
+        description: Build without uploading
+        default: false
+        type: boolean
+      publish_github:
+        description: Publish to GitHub Releases
+        default: true
+        type: boolean
+      publish_curseforge:
+        description: Publish to CurseForge
+        default: true
+        type: boolean
+      publish_modrinth:
+        description: Publish to Modrinth
+        default: true
+        type: boolean
+      release_type:
+        description: Release channel
+        default: STABLE
+        type: choice
+        options: [STABLE, BETA, ALPHA]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-24.04
+    environment: release
+    env:
+      PUBLISH_VERSIONS: ${{ inputs.minecraft_versions }}
+      DRY_RUN: ${{ inputs.dry_run }}
+      RELEASE_TYPE: ${{ inputs.release_type }}
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Validate release inputs
+        env:
+          CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
+          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+          PUBLISH_CURSEFORGE: ${{ inputs.publish_curseforge }}
+          PUBLISH_MODRINTH: ${{ inputs.publish_modrinth }}
+        run: |
+          test -s CHANGELOG.md
+          if [[ "$DRY_RUN" != "true" ]]; then
+            if [[ "$PUBLISH_CURSEFORGE" == "true" ]]; then
+              : "${CURSEFORGE_API_KEY:?CURSEFORGE_API_KEY is not configured}"
+            fi
+            if [[ "$PUBLISH_MODRINTH" == "true" ]]; then
+              : "${MODRINTH_TOKEN:?MODRINTH_TOKEN is not configured}"
+            fi
+          fi
+
+      - name: Read Java requirement
+        id: java
+        run: |
+          python3 - <<'PY'
+          import os, tomllib
+          from pathlib import Path
+          data = tomllib.loads(Path("stonecutter.properties.toml").read_text())
+          requirements = [int(data["deps"]["java"])]
+          requirements += [int(section["deps"]["java"]) for section in data.values()
+                           if isinstance(section, dict) and "java" in section.get("deps", {})]
+          with open(os.environ["GITHUB_OUTPUT"], "a") as output:
+              output.write(f"version={max(requirements)}\n")
+          PY
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: ${{ steps.java.outputs.version }}
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Build all versions
+        run: |
+          chmod +x gradlew
+          ./gradlew buildAll --console plain
+
+      - name: Publish GitHub release
+        if: ${{ inputs.publish_github }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          CHANGELOG="$(cat CHANGELOG.md)" ./gradlew publishMods \
+            -PpublishDryRun="$DRY_RUN" -PreleaseType="$RELEASE_TYPE" \
+            -PpublishGitHub=true -PpublishCurseForge=false -PpublishModrinth=false \
+            --no-parallel --console plain
+
+      - name: Publish CurseForge files
+        if: ${{ inputs.publish_curseforge }}
+        env:
+          CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
+        run: |
+          CHANGELOG="$(cat CHANGELOG.md)" ./gradlew publishMods \
+            -PpublishDryRun="$DRY_RUN" -PreleaseType="$RELEASE_TYPE" \
+            -PpublishGitHub=false -PpublishCurseForge=true -PpublishModrinth=false \
+            --no-parallel --console plain
+
+      - name: Publish Modrinth files
+        if: ${{ inputs.publish_modrinth }}
+        env:
+          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+        run: |
+          CHANGELOG="$(cat CHANGELOG.md)" ./gradlew publishMods \
+            -PpublishDryRun="$DRY_RUN" -PreleaseType="$RELEASE_TYPE" \
+            -PpublishGitHub=false -PpublishCurseForge=false -PpublishModrinth=true \
+            --no-parallel --console plain
