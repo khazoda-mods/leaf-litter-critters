@@ -1,0 +1,144 @@
+{
+  "sources": [
+    {
+      "type": "minecraft:single",
+      "resource": "llc:particle/woodlouse_0",
+      "sprite": "llc:woodlouse_0"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "llc:particle/woodlouse_1",
+      "sprite": "llc:woodlouse_1"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "llc:particle/woodlouse_2",
+      "sprite": "llc:woodlouse_2"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "llc:particle/woodlouse_3",
+      "sprite": "llc:woodlouse_3"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "llc:particle/ladybird_0",
+      "sprite": "llc:ladybird_0"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "llc:particle/ladybird_1",
+      "sprite": "llc:ladybird_1"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "llc:particle/ladybird_2",
+      "sprite": "llc:ladybird_2"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "llc:particle/ladybird_3",
+      "sprite": "llc:ladybird_3"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "llc:particle/worm_0",
+      "sprite": "llc:worm_0"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "llc:particle/worm_1",
+      "sprite": "llc:worm_1"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "llc:particle/worm_2",
+      "sprite": "llc:worm_2"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "llc:particle/worm_3",
+      "sprite": "llc:worm_3"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "llc:particle/shieldbug_0",
+      "sprite": "llc:shieldbug_0"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "llc:particle/shieldbug_1",
+      "sprite": "llc:shieldbug_1"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "llc:particle/shieldbug_2",
+      "sprite": "llc:shieldbug_2"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "llc:particle/shieldbug_3",
+      "sprite": "llc:shieldbug_3"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "llc:particle/froghopper_0",
+      "sprite": "llc:froghopper_0"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "llc:particle/froghopper_1",
+      "sprite": "llc:froghopper_1"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "llc:particle/froghopper_2",
+      "sprite": "llc:froghopper_2"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "llc:particle/froghopper_3",
+      "sprite": "llc:froghopper_3"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "llc:particle/yellow_flat_footed_fly_0",
+      "sprite": "llc:yellow_flat_footed_fly_0"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "llc:particle/yellow_flat_footed_fly_1",
+      "sprite": "llc:yellow_flat_footed_fly_1"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "llc:particle/yellow_flat_footed_fly_2",
+      "sprite": "llc:yellow_flat_footed_fly_2"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "llc:particle/yellow_flat_footed_fly_3",
+      "sprite": "llc:yellow_flat_footed_fly_3"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "llc:particle/millipede_0",
+      "sprite": "llc:millipede_0"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "llc:particle/millipede_1",
+      "sprite": "llc:millipede_1"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "llc:particle/millipede_2",
+      "sprite": "llc:millipede_2"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "llc:particle/millipede_3",
+      "sprite": "llc:millipede_3"
+    }
+  ]
+}

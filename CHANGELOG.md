@@ -1,0 +1,4 @@
+initial release with the following features:
+- animated woodlice, ladybirds, worms, shieldbugs, froghoppers and millipede particles that spawn in leaf litter
+- yellow flat-footed flies spawn in leaf litter in dappled forests 26.3+
+- particles are spawned ambiently, by walking on leaf litter or by breaking it, all with different lifetimes and spawn counts

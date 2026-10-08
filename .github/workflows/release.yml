@@ -12,7 +12,7 @@ on:
         default: false
         type: boolean
       publish_github:
-        description: Publish to GitHub Releases
+        description: Publish to GitHub Releases (update CHANGELOG.md before publishing)
         default: true
         type: boolean
       publish_curseforge:
@@ -54,7 +54,7 @@ jobs:
           PUBLISH_CURSEFORGE: ${{ inputs.publish_curseforge }}
           PUBLISH_MODRINTH: ${{ inputs.publish_modrinth }}
         run: |
-          test -s CHANGELOG.md
+          test -s CHANGELOG.md || { echo "Add release notes to CHANGELOG.md before publishing."; exit 1; }
           if [[ "$DRY_RUN" != "true" ]]; then
             if [[ "$PUBLISH_CURSEFORGE" == "true" ]]; then
               : "${CURSEFORGE_API_KEY:?CURSEFORGE_API_KEY is not configured}"
