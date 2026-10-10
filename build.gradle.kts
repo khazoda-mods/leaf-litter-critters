@@ -40,6 +40,7 @@ loom {
 
 tasks.processResources {
     val icon = prop("mod.icon")
+    val banner = prop("mod.banner")
     val props = mapOf(
         "id" to prop("mod.id"),
         "name" to prop("mod.name"),
@@ -49,7 +50,11 @@ tasks.processResources {
         "license" to prop("mod.license"),
         "homepage" to prop("mod.homepage"),
         "sources" to prop("mod.sources"),
+        "issues" to prop("mod.issues"),
+        "discord" to prop("mod.discord"),
         "icon" to icon,
+        "banner" to banner,
+        "background" to prop("mod.background"),
         "mixins" to prop("mod.mixins"),
         "environment" to prop("mod.environment"),
         "neoforge_side" to prop("mod.environment").uppercase(),
@@ -58,9 +63,11 @@ tasks.processResources {
         "neoforge" to prop("mod.neo_compat"),
         "fabric_loader" to prop("deps.fabric_loader"),
         "java" to requiredJava,
-        "neoforge_icon" to if (sc.current.parsed >= "26.2")
-            "iconFile = \"$icon\"\nbannerFile = \"assets/llc/banner.png\"\niconBlur = false"
-        else "logoFile = \"$icon\"\nlogoBlur = false"
+        "neoforge_branding" to if (sc.current.parsed >= "26.2")
+            "iconFile = \"$icon\"\n" +
+            "bannerFile = \"$banner\"\n" +
+            "iconBlur = false"
+        else ""
     )
     inputs.properties(props)
     filesMatching(listOf("fabric.mod.json", "META-INF/neoforge.mods.toml")) { expand(props) }

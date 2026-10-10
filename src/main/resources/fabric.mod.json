@@ -9,7 +9,8 @@
   ],
   "contact": {
     "homepage": "${homepage}",
-    "sources": "${sources}"
+    "sources": "${sources}",
+    "issues": "${issues}"
   },
   "license": "${license}",
   "icon": "${icon}",
@@ -23,5 +24,16 @@
     "fabric-resource-loader-v1": "*",
     "minecraft": "${fabric_minecraft}",
     "java": ">=${java}"
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.discord": "${discord}"
+      }
+    },
+    "catalogue": {
+      "banner": "${banner}",
+      "background": "${background}"
+    }
   }
 }

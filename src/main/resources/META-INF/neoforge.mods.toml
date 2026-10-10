@@ -1,6 +1,7 @@
 modLoader = "javafml"
 loaderVersion = "[4,)"
 license = "${license}"
+issueTrackerURL = "${issues}"
 
 [[mods]]
 modId = "${id}"
@@ -9,7 +10,10 @@ displayName = "${name}"
 displayURL = "${homepage}"
 authors = "${authors}"
 description = '''${description}'''
-${neoforge_icon}
+issueTrackerURL = "${issues}"
+logoFile = "${banner}"
+logoBlur = false
+${neoforge_branding}
 
 [[dependencies.${id}]]
 modId = "neoforge"
@@ -27,3 +31,7 @@ side = "${neoforge_side}"
 
 [[mixins]]
 config = "${mixins}"
+
+[modproperties.${id}]
+catalogueImageIcon = "${icon}"
+catalogueBackground = "${background}"
