@@ -1,0 +1,17 @@
+{
+  "config.llc.title": "Настройки Leaf Litter Critters",
+  "config.llc.yellow_flies_all_biomes": "Жёлтые мухи во всех биомах",
+  "config.llc.yellow_flies_all_biomes.tooltip": "Разрешить появление жёлтых мух за пределами Пёстрого леса (кроме Бледного сада)",
+  "config.llc.ambient_spawn_rate": "Частота появления существ",
+  "config.llc.ambient_spawn_rate.tooltip": "0 - отключено, 0.5 - стандартная частота, 1 - вдвое чаще. Будьте осторожны с высокими значениями!",
+  "config.llc.walking_spawn_rate": "Появление при ходьбе",
+  "config.llc.walking_spawn_rate.tooltip": "0 - отключено, 0.5 - стандартная частота, 1 - вдвое чаще. Будьте осторожны с высокими значениями!",
+  "config.llc.breaking_spawn_rate": "Появление при ломании блоков",
+  "config.llc.breaking_spawn_rate.tooltip": "0 - отключено, 0.5 - стандартная частота, 1 - вдвое чаще. Будьте осторожны с высокими значениями!",
+  "config.llc.max_ambient_particles": "Максимум существ",
+  "config.llc.max_ambient_particles.tooltip": "Максимальное количество существ одновременно. 0 - отключить появление. Будьте осторожны с высокими значениями!",
+  "config.llc.max_walking_particles": "Максимум существ при ходьбе",
+  "config.llc.max_walking_particles.tooltip": "Максимальное количество существ одновременно. 0 - отключить появление. Будьте осторожны с высокими значениями!",
+  "config.llc.max_breaking_particles": "Максимум существ при ломании блоков",
+  "config.llc.max_breaking_particles.tooltip": "Максимальное количество существ одновременно. 0 - отключить появление. Будьте осторожны с высокими значениями!"
+}
