@@ -49,8 +49,8 @@ jobs:
 
       - name: Validate release inputs
         env:
-          CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
-          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+          CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_PUBLISH_TOKEN }}
+          MODRINTH_TOKEN: ${{ secrets.MODRINTH_PUBLISH_TOKEN }}
           PUBLISH_CURSEFORGE: ${{ inputs.publish_curseforge }}
           PUBLISH_MODRINTH: ${{ inputs.publish_modrinth }}
         run: |
@@ -102,7 +102,7 @@ jobs:
       - name: Publish CurseForge files
         if: ${{ inputs.publish_curseforge }}
         env:
-          CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
+          CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_PUBLISH_TOKEN }}
         run: |
           CHANGELOG="$(cat CHANGELOG.md)" ./gradlew publishMods \
             -PpublishDryRun="$DRY_RUN" -PreleaseType="$RELEASE_TYPE" \
@@ -112,7 +112,7 @@ jobs:
       - name: Publish Modrinth files
         if: ${{ inputs.publish_modrinth }}
         env:
-          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+          MODRINTH_TOKEN: ${{ secrets.MODRINTH_PUBLISH_TOKEN }}
         run: |
           CHANGELOG="$(cat CHANGELOG.md)" ./gradlew publishMods \
             -PpublishDryRun="$DRY_RUN" -PreleaseType="$RELEASE_TYPE" \
