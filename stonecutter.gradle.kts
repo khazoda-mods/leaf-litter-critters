@@ -69,6 +69,7 @@ publishMods {
                 modLoaders.addAll("fabric", "neoforge")
                 minecraftVersions.addAll(releases)
                 environment.set(ModrinthEnvironment.CLIENT_ONLY)
+                requires("khazodacore")
             }
         }
         if (publishCurseForge) {
@@ -82,6 +83,7 @@ publishMods {
                 minecraftVersions.addAll(releases)
                 client.set(true)
                 server.set(false)
+                requires("khazodacore")
             }
         }
     }

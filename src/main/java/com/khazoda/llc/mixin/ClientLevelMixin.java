@@ -33,12 +33,12 @@ public abstract class ClientLevelMixin {
     BlockState state = level.getBlockState(pos);
     if (!(state.getBlock() instanceof LeafLitterBlock)) return;
 
-    LeafLitterCritters.scatter(level, pos, state, 0.25F, SpawnCause.WALK);
+    LeafLitterCritters.scatter(level, pos, state, SpawnCause.WALK);
   }
 
   @Inject(method = "addDestroyBlockEffect", at = @At("HEAD"))
   private void llc$break(BlockPos pos, BlockState blockState, CallbackInfo ci) {
     if (!(blockState.getBlock() instanceof LeafLitterBlock)) return;
-    LeafLitterCritters.scatter((ClientLevel) (Object) this, pos, blockState, 0.75F, SpawnCause.BREAK);
+    LeafLitterCritters.scatter((ClientLevel) (Object) this, pos, blockState, SpawnCause.BREAK);
   }
 }

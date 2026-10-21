@@ -13,25 +13,32 @@ description = '''${description}'''
 issueTrackerURL = "${issues}"
 logoFile = "${banner}"
 logoBlur = false
-${neoforge_branding}
+${ neoforge_branding }
 
-[[dependencies.${id}]]
+[[dependencies.${ id }]]
 modId = "neoforge"
 type = "required"
 versionRange = "${neoforge}"
 ordering = "NONE"
 side = "${neoforge_side}"
 
-[[dependencies.${id}]]
+[[dependencies.${ id }]]
 modId = "minecraft"
 type = "required"
 versionRange = "${neoforge_minecraft}"
 ordering = "NONE"
 side = "${neoforge_side}"
 
+[[dependencies.${ id }]]
+modId = "khazodacore"
+type = "required"
+versionRange = "[${khazodacore},)"
+ordering = "AFTER"
+side = "CLIENT"
+
 [[mixins]]
 config = "${mixins}"
 
-[modproperties.${id}]
+[modproperties.${ id }]
 catalogueImageIcon = "${icon}"
 catalogueBackground = "${background}"

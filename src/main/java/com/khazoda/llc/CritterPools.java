@@ -16,6 +16,8 @@ import static com.khazoda.llc.Critter.*;
  * chooses which critters to spawn based on the biome
  */
 final class CritterPools {
+  private static final ResourceKey<Biome> DAPPLED_FOREST = ResourceKey.create(
+      Registries.BIOME, Identifier.withDefaultNamespace("dappled_forest"));
   private static final Critter[] DEFAULT = {
       WOODLOUSE, LADYBIRD, WORM, SHIELDBUG, FROGHOPPER, MILLIPEDE
   };
@@ -38,7 +40,7 @@ final class CritterPools {
       Biomes.PALE_GARDEN, new Critter[]{
           WOODLOUSE
       },
-      ResourceKey.create(Registries.BIOME, Identifier.withDefaultNamespace("dappled_forest")), new Critter[]{
+      DAPPLED_FOREST, new Critter[]{
           WOODLOUSE, LADYBIRD, WORM, SHIELDBUG,
           FROGHOPPER, MILLIPEDE, YELLOW_FLAT_FOOTED_FLY
       }
@@ -50,6 +52,10 @@ final class CritterPools {
   static Critter choose(ClientLevel level, BlockPos pos) {
     var biome = level.getBiome(pos).unwrapKey().orElse(null);
     Critter[] pool = biome == null ? DEFAULT : BIOMES.getOrDefault(biome, DEFAULT);
-    return pool[level.getRandom().nextInt(pool.length)];
+    boolean addFly = CritterConfig.CONFIG.get(CritterConfig.YELLOW_FLIES_ALL_BIOMES)
+        && !Biomes.PALE_GARDEN.equals(biome)
+        && !DAPPLED_FOREST.equals(biome);
+    int index = level.getRandom().nextInt(pool.length + (addFly ? 1 : 0));
+    return index == pool.length ? YELLOW_FLAT_FOOTED_FLY : pool[index];
   }
 }

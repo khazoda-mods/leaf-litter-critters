@@ -24,13 +24,14 @@ import java.util.WeakHashMap;
 import static com.khazoda.llc.Critter.YELLOW_FLAT_FOOTED_FLY;
 
 abstract class CritterParticle extends SingleQuadParticle {
-  static final double GROUND_OFFSET = 0.015;
   private static final Set<CritterParticle> AMBIENT = Collections.newSetFromMap(new WeakHashMap<>());
-  private static final Set<CritterParticle> DISTURBED = Collections.newSetFromMap(new WeakHashMap<>());
+  private static final Set<CritterParticle> WALKING = Collections.newSetFromMap(new WeakHashMap<>());
+  private static final Set<CritterParticle> BREAKING = Collections.newSetFromMap(new WeakHashMap<>());
   private static final FacingCameraMode FLAT_GROUND_FACING = (rotation, camera, partialTick) -> rotation.rotationX(-Mth.HALF_PI);
   protected final Critter species;
   private final TextureAtlasSprite[] frames = new TextureAtlasSprite[4];
   private final float initialSize;
+  private final double groundOffset = variation(0.013F, 0.017F);
   protected float animation;
 
   protected int fadeTicks;
@@ -40,7 +41,7 @@ abstract class CritterParticle extends SingleQuadParticle {
 
   protected CritterParticle(ClientLevel level, double x, double y, double z, Critter species, SpawnCause cause) {
     super(level, x, y, z, sprite(species, 0));
-    (cause == SpawnCause.AMBIENT ? AMBIENT : DISTURBED).add(this);
+    particles(cause).add(this);
     this.species = species;
 
     frames[0] = sprite;
@@ -56,16 +57,30 @@ abstract class CritterParticle extends SingleQuadParticle {
     animation = random.nextFloat() * frames.length;
     fadeTicks = ticks(10, 15);
 
-    groundY = y;
+    setPos(x, y + groundOffset, z);
+    groundY = yo = this.y;
     roll = oRoll = random.nextFloat() * Mth.TWO_PI;
     alpha = 0;
     hasPhysics = false;
   }
 
+  private static Set<CritterParticle> particles(SpawnCause cause) {
+    return switch (cause) {
+      case AMBIENT -> AMBIENT;
+      case WALK -> WALKING;
+      case BREAK -> BREAKING;
+    };
+  }
+
   static boolean hasSpace(ClientLevel level, SpawnCause cause) {
-    Set<CritterParticle> critters = cause == SpawnCause.AMBIENT ? AMBIENT : DISTURBED;
+    Set<CritterParticle> critters = particles(cause);
     critters.removeIf(particle -> particle.level != level || !particle.isAlive());
-    return critters.size() < 64;
+    int limit = CritterConfig.CONFIG.get(switch (cause) {
+      case AMBIENT -> CritterConfig.MAX_AMBIENT_PARTICLES;
+      case WALK -> CritterConfig.MAX_WALKING_PARTICLES;
+      case BREAK -> CritterConfig.MAX_BREAKING_PARTICLES;
+    });
+    return critters.size() < limit;
   }
 
   private static TextureAtlasSprite sprite(Critter species, int frame) {
@@ -121,7 +136,7 @@ abstract class CritterParticle extends SingleQuadParticle {
       return false;
     }
 
-    double nextGroundY = ground.getLocation().y + GROUND_OFFSET;
+    double nextGroundY = ground.getLocation().y + groundOffset;
     double nextY = nextGroundY + height;
 
     if (!level.getFluidState(BlockPos.containing(nextX, nextGroundY, nextZ)).isEmpty() || checkFlightPath && pathBlocked(nextX, nextY, nextZ, Fluid.NONE)) {

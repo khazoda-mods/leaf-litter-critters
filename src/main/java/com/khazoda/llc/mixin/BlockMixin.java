@@ -22,7 +22,7 @@ public abstract class BlockMixin {
   @Inject(method = "animateTick", at = @At("HEAD"))
   private void llc$ambient(BlockState state, Level level, BlockPos pos, RandomSource random, CallbackInfo ci) {
     if (level instanceof ClientLevel client && state.getBlock() instanceof LeafLitterBlock) {
-      LeafLitterCritters.scatter(client, pos, state, 1 / 256F, SpawnCause.AMBIENT);
+      LeafLitterCritters.scatter(client, pos, state, SpawnCause.AMBIENT);
     }
   }
 }

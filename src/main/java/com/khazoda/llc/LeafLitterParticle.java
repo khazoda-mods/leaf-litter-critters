@@ -44,7 +44,7 @@ final class LeafLitterParticle extends CritterParticle {
 
   static CritterParticle create(ClientLevel level, BlockPos pos, double x, double z, SpawnCause cause) {
     Critter species = CritterPools.choose(level, pos);
-    double y = pos.getY() + GROUND_OFFSET;
+    double y = pos.getY();
     return species == YELLOW_FLAT_FOOTED_FLY ? new YellowFlyParticle(level, x, y, z, cause) : new LeafLitterParticle(level, x, y, z, species, cause);
   }
 

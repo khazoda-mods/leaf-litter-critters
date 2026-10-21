@@ -4,3 +4,4 @@ initial release with the following features:
 - only woodlice spawn in leaf litter in pale gardens
 - biome-specific critter rarities in forests, dark forests and wooded badlands
 - particles are spawned ambiently, by walking on leaf litter or by breaking it, all with different lifetimes and spawn counts
+- config provided by khazodacore

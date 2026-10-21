@@ -20,6 +20,7 @@
   ],
   "depends": {
     "fabricloader": ">=${fabric_loader}",
+    "khazodacore": ">=${khazodacore}",
     "fabric-api-base": "*",
     "fabric-resource-loader-v1": "*",
     "minecraft": "${fabric_minecraft}",

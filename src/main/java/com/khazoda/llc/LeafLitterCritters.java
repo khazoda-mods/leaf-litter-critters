@@ -17,21 +17,24 @@ public final class LeafLitterCritters {
   private LeafLitterCritters() {
   }
 
-  public static void scatter(ClientLevel level, BlockPos pos, BlockState litter, float chance, SpawnCause cause) {
+  public static void scatter(ClientLevel level, BlockPos pos, BlockState litter, SpawnCause cause) {
     if (!canSpawn(level, pos)) return;
+    double rate = CritterConfig.spawnRate(cause);
     Minecraft minecraft = Minecraft.getInstance();
     RandomSource random = level.getRandom();
 
     int pieces = litter.getValue(SegmentableBlock.AMOUNT);
     Direction facing = litter.getValue(LeafLitterBlock.FACING);
     for (int i = 0; i < pieces; i++) {
-      if (random.nextFloat() >= chance) continue;
-      if (!CritterParticle.hasSpace(level, cause)) return;
-      Direction quadrant = facing;
-      for (int j = random.nextInt(pieces); j > 0; j--) quadrant = quadrant.getCounterClockWise();
-      double x = pos.getX() + (quadrant == Direction.SOUTH || quadrant == Direction.EAST ? 0.5 : 0) + random.nextDouble() * 0.5;
-      double z = pos.getZ() + (quadrant == Direction.SOUTH || quadrant == Direction.WEST ? 0.5 : 0) + random.nextDouble() * 0.5;
-      minecraft.particleEngine.add(LeafLitterParticle.create(level, pos, x, z, cause));
+      for (double remaining = rate; remaining > 0; remaining--) {
+        if (random.nextFloat() >= remaining) break;
+        if (!CritterParticle.hasSpace(level, cause)) return;
+        Direction quadrant = facing;
+        for (int j = random.nextInt(pieces); j > 0; j--) quadrant = quadrant.getCounterClockWise();
+        double x = pos.getX() + (quadrant == Direction.SOUTH || quadrant == Direction.EAST ? 0.5 : 0) + random.nextDouble() * 0.5;
+        double z = pos.getZ() + (quadrant == Direction.SOUTH || quadrant == Direction.WEST ? 0.5 : 0) + random.nextDouble() * 0.5;
+        minecraft.particleEngine.add(LeafLitterParticle.create(level, pos, x, z, cause));
+      }
     }
   }
 

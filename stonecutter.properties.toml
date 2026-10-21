@@ -20,6 +20,7 @@ mod.modrinth_id = "whcoHyco"
 mod.curseforge_id = "1728376"
 
 deps.fabric_loader = "0.19.5"
+deps.khazodacore = "1.0.4"
 deps.java = "25"
 
 ["26.1"]

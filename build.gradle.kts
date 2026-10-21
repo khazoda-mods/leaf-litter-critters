@@ -19,19 +19,27 @@ tasks.withType<JavaCompile>().configureEach {
     options.release = requiredJava
 }
 
+repositories {
+    maven("https://maven.khazoda.com/releases") {
+        content { includeGroup("com.khazoda") }
+    }
+}
+
 dependencies {
     minecraft("com.mojang:minecraft:${sc.current.version}")
     implementation("net.fabricmc:fabric-loader:${prop("deps.fabric_loader")}")
+    compileOnly("com.khazoda:khazodacore-common:${prop("deps.khazodacore")}+${sc.current.version}")
+    runtimeOnly("com.khazoda:khazodacore-fabric:${prop("deps.khazodacore")}+${sc.current.version}")
     for (module in listOf("fabric-api-base", "fabric-resource-loader-v1")) {
-        val dependency = fabricApi.module(module, prop("deps.fabric_api"))
-        runtimeOnly(dependency)
-        include(dependency)
+        runtimeOnly(fabricApi.module(module, prop("deps.fabric_api")))
     }
 }
 
 loom {
     fabricModJsonPath = rootProject.file("src/main/resources/fabric.mod.json")
     runs.configureEach {
+        displayName.set("Fabric ${name.replaceFirstChar(Char::uppercase)} - ${sc.current.version}")
+        appendProjectPathToDisplayName.set(false)
         generateRunConfig = true
         preferGradleTask = true
         runDirectory = rootProject.file("run/fabric/${sc.current.version}")
@@ -62,11 +70,12 @@ tasks.processResources {
         "neoforge_minecraft" to prop("mod.neo_minecraft_compat"),
         "neoforge" to prop("mod.neo_compat"),
         "fabric_loader" to prop("deps.fabric_loader"),
+        "khazodacore" to prop("deps.khazodacore"),
         "java" to requiredJava,
         "neoforge_branding" to if (sc.current.parsed >= "26.2")
             "iconFile = \"$icon\"\n" +
-            "bannerFile = \"$banner\"\n" +
-            "iconBlur = false"
+                    "bannerFile = \"$banner\"\n" +
+                    "iconBlur = false"
         else ""
     )
     inputs.properties(props)

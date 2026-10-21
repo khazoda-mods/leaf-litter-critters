@@ -17,7 +17,14 @@ val universalJar = rootProject.layout.projectDirectory.file("versions/$minecraft
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(prop("deps.java").toInt())
 
+repositories {
+    maven("https://maven.khazoda.com/releases") {
+        content { includeGroup("com.khazoda") }
+    }
+}
+
 dependencies {
+    runtimeOnly("com.khazoda:khazodacore-neoforge:${prop("deps.khazodacore")}+$minecraft")
     runtimeOnly(files(universalJar).builtBy(":$minecraft:jar"))
 }
 
