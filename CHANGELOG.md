@@ -1,6 +1,3 @@
-## 1.1.0
+## 1.2.0
 ### new
-- undead mobs spawn woodlice and worms when they die 
-- config values for undead mob death spawn rate and max particles
-### fixes
-- spawn height of critters tweaked so they remain under leaf litter and can't z-fight with it
+- new config option "Bite-size bugs" which changes all bug textures to 1x2 pixel sprites

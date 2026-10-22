@@ -1,5 +1,7 @@
 {
   "config.llc.title": "Настройки Leaf Litter Critters",
+  "config.llc.bitesize_bugs": "Мелкие букашки",
+  "config.llc.bitesize_bugs.tooltip": "Использовать двухпиксельные текстуры для существ",
   "config.llc.yellow_flies_all_biomes": "Жёлтые мухи во всех биомах",
   "config.llc.yellow_flies_all_biomes.tooltip": "Разрешить появление жёлтых мух за пределами Пёстрого леса (кроме Бледного сада)",
   "config.llc.ambient_spawn_rate": "Частота появления существ",

@@ -88,7 +88,8 @@ abstract class CritterParticle extends SingleQuadParticle {
 
   private static TextureAtlasSprite sprite(Critter species, int frame) {
     return Minecraft.getInstance().getAtlasManager().getAtlasOrThrow(AtlasIds.PARTICLES)
-        .getSprite(Identifier.fromNamespaceAndPath("llc", species.texture + "_" + frame));
+        .getSprite(Identifier.fromNamespaceAndPath("llc", species.texture
+            + (CritterConfig.CONFIG.get(CritterConfig.BITESIZE_BUGS) ? "_bitesize" : "_" + frame)));
   }
 
   protected final int lifespan(int normalTicks, int transitionTicks, SpawnCause cause) {

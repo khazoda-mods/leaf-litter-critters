@@ -1,5 +1,7 @@
 {
   "config.llc.title": "Leaf Litter Critters Settings",
+  "config.llc.bitesize_bugs": "Bite-size bugs",
+  "config.llc.bitesize_bugs.tooltip": "Use two-pixel textures for critters instead",
   "config.llc.yellow_flies_all_biomes": "Yellow flies in all biomes",
   "config.llc.yellow_flies_all_biomes.tooltip": "Allow yellow flies outside Dappled Forests (but not Pale Gardens)",
   "config.llc.ambient_spawn_rate": "Ambient spawn rate",

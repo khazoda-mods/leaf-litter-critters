@@ -5,6 +5,11 @@ import com.khazoda.core.config.KhazConfig.Entry;
 import net.minecraft.client.Minecraft;
 
 public final class CritterConfig {
+  static final Entry<Boolean> BITESIZE_BUGS = KhazConfig.bool(
+          "bitesize_bugs", false,
+          "use two-pixel textures for critters instead")
+      .localOnly();
+
   static final Entry<Boolean> YELLOW_FLIES_ALL_BIOMES = KhazConfig.bool(
           "yellow_flies_all_biomes", false,
           "allow yellow flies outside dappled forests (but not pale gardens)")
@@ -52,7 +57,7 @@ public final class CritterConfig {
 
   public static final KhazConfig CONFIG = KhazConfig.of("Leaf Litter Critters", "llc",
       Minecraft.getInstance().gameDirectory.toPath().resolve("config"),
-      YELLOW_FLIES_ALL_BIOMES,
+      BITESIZE_BUGS, YELLOW_FLIES_ALL_BIOMES,
       AMBIENT_SPAWN_RATE, WALKING_SPAWN_RATE, BREAKING_SPAWN_RATE, MOB_DEATH_SPAWN_RATE,
       MAX_AMBIENT_PARTICLES, MAX_WALKING_PARTICLES, MAX_BREAKING_PARTICLES, MAX_MOB_DEATH_PARTICLES);
 
