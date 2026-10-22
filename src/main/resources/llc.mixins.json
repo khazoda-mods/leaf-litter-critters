@@ -2,7 +2,7 @@
   "required": true,
   "package": "com.khazoda.llc.mixin",
   "compatibilityLevel": "${java}",
-  "client": ["BlockMixin", "ClientLevelMixin", "MinecraftMixin"],
+  "client": ["BlockMixin", "ClientLevelMixin", "LivingEntityMixin", "MinecraftMixin"],
   "injectors": {
     "defaultRequire": 1
   }

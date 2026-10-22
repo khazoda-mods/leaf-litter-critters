@@ -42,9 +42,10 @@ final class LeafLitterParticle extends CritterParticle {
     setFrame(species.airborne ? 0 : (int) animation);
   }
 
-  static CritterParticle create(ClientLevel level, BlockPos pos, double x, double z, SpawnCause cause) {
-    Critter species = CritterPools.choose(level, pos);
-    double y = pos.getY();
+  static CritterParticle create(ClientLevel level, BlockPos pos, double x, double y, double z, SpawnCause cause) {
+    Critter species = cause == SpawnCause.MOB_DEATH
+        ? (level.getRandom().nextBoolean() ? Critter.WORM : Critter.WOODLOUSE)
+        : CritterPools.choose(level, pos);
     return species == YELLOW_FLAT_FOOTED_FLY ? new YellowFlyParticle(level, x, y, z, cause) : new LeafLitterParticle(level, x, y, z, species, cause);
   }
 

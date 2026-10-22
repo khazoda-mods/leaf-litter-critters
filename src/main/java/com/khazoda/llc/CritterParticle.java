@@ -27,6 +27,7 @@ abstract class CritterParticle extends SingleQuadParticle {
   private static final Set<CritterParticle> AMBIENT = Collections.newSetFromMap(new WeakHashMap<>());
   private static final Set<CritterParticle> WALKING = Collections.newSetFromMap(new WeakHashMap<>());
   private static final Set<CritterParticle> BREAKING = Collections.newSetFromMap(new WeakHashMap<>());
+  private static final Set<CritterParticle> MOB_DEATH = Collections.newSetFromMap(new WeakHashMap<>());
   private static final FacingCameraMode FLAT_GROUND_FACING = (rotation, camera, partialTick) -> rotation.rotationX(-Mth.HALF_PI);
   protected final Critter species;
   private final TextureAtlasSprite[] frames = new TextureAtlasSprite[4];
@@ -66,9 +67,10 @@ abstract class CritterParticle extends SingleQuadParticle {
 
   private static Set<CritterParticle> particles(SpawnCause cause) {
     return switch (cause) {
-      case AMBIENT -> AMBIENT;
-      case WALK -> WALKING;
-      case BREAK -> BREAKING;
+      case SpawnCause.AMBIENT -> AMBIENT;
+      case SpawnCause.WALK -> WALKING;
+      case SpawnCause.BREAK -> BREAKING;
+      case SpawnCause.MOB_DEATH -> MOB_DEATH;
     };
   }
 
@@ -76,9 +78,10 @@ abstract class CritterParticle extends SingleQuadParticle {
     Set<CritterParticle> critters = particles(cause);
     critters.removeIf(particle -> particle.level != level || !particle.isAlive());
     int limit = CritterConfig.CONFIG.get(switch (cause) {
-      case AMBIENT -> CritterConfig.MAX_AMBIENT_PARTICLES;
-      case WALK -> CritterConfig.MAX_WALKING_PARTICLES;
-      case BREAK -> CritterConfig.MAX_BREAKING_PARTICLES;
+      case SpawnCause.AMBIENT -> CritterConfig.MAX_AMBIENT_PARTICLES;
+      case SpawnCause.WALK -> CritterConfig.MAX_WALKING_PARTICLES;
+      case SpawnCause.BREAK -> CritterConfig.MAX_BREAKING_PARTICLES;
+      case SpawnCause.MOB_DEATH -> CritterConfig.MAX_MOB_DEATH_PARTICLES;
     });
     return critters.size() < limit;
   }
@@ -91,9 +94,9 @@ abstract class CritterParticle extends SingleQuadParticle {
   protected final int lifespan(int normalTicks, int transitionTicks, SpawnCause cause) {
     int activeTicks = normalTicks - transitionTicks;
     return switch (cause) {
-      case WALK -> normalTicks;
-      case BREAK -> normalTicks * 2;
-      case AMBIENT -> transitionTicks + ticks(activeTicks * 20, activeTicks * 55);
+      case SpawnCause.WALK, SpawnCause.MOB_DEATH -> normalTicks;
+      case SpawnCause.BREAK -> normalTicks * 2;
+      case SpawnCause.AMBIENT -> transitionTicks + ticks(activeTicks * 20, activeTicks * 55);
     };
   }
 

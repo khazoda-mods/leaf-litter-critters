@@ -8,10 +8,14 @@
   "config.llc.walking_spawn_rate.tooltip": "0 is off, 0.5 is normal, 1 is double. Be careful if setting high values.",
   "config.llc.breaking_spawn_rate": "Breaking spawn rate",
   "config.llc.breaking_spawn_rate.tooltip": "0 is off, 0.5 is normal, 1 is double. Be careful if setting high values.",
+  "config.llc.mob_death_spawn_rate": "Mob death spawn rate",
+  "config.llc.mob_death_spawn_rate.tooltip": "0 is off, 0.5 is normal, 1 is double. Be careful if setting high values.",
   "config.llc.max_ambient_particles": "Ambient critter limit",
   "config.llc.max_ambient_particles.tooltip": "Maximum critters at once, 0 disables them. Be careful if setting high values.",
   "config.llc.max_walking_particles": "Walking critter limit",
   "config.llc.max_walking_particles.tooltip": "Maximum critters at once, 0 disables them. Be careful if setting high values.",
   "config.llc.max_breaking_particles": "Breaking critter limit",
-  "config.llc.max_breaking_particles.tooltip": "Maximum critters at once, 0 disables them. Be careful if setting high values."
+  "config.llc.max_breaking_particles.tooltip": "Maximum critters at once, 0 disables them. Be careful if setting high values.",
+  "config.llc.max_mob_death_particles": "Mob death critter limit",
+  "config.llc.max_mob_death_particles.tooltip": "Maximum critters at once, 0 disables them. Be careful if setting high values."
 }
