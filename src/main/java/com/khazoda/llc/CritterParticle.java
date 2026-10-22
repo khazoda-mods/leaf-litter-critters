@@ -32,7 +32,7 @@ abstract class CritterParticle extends SingleQuadParticle {
   protected final Critter species;
   private final TextureAtlasSprite[] frames = new TextureAtlasSprite[4];
   private final float initialSize;
-  private final double groundOffset = variation(0.013F, 0.017F);
+  private final double groundOffset = variation(0.010F, 0.014F);
   protected float animation;
 
   protected int fadeTicks;
